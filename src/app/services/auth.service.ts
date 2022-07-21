@@ -1,3 +1,4 @@
+import { CreateUserDto } from './../model/create-user-dto';
 import { Observable } from 'rxjs';
 import { LoginUserDto } from './../model/login-user-dto';
 import { HttpClient } from '@angular/common/http';
@@ -16,5 +17,9 @@ export class AuthService {
 
   public login(dto: LoginUserDto): Observable<JwtTokenDto> {
     return this.httpClient.post<JwtTokenDto>(this.authURL + 'login', dto);
+  }
+
+  public register(dto: CreateUserDto): Observable<any> {
+    return this.httpClient.post<any>(this.authURL + 'create-user', dto);
   }
 }
