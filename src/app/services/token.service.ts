@@ -39,4 +39,15 @@ export class TokenService {
     }
     return true;
   }
+
+  public getUsername(): string {
+    if(!this.isLogged()) {
+      return '';
+    }
+    const token = this.getToken(); 
+    const payload = token!.split(".")[1];
+    const payloadDecoded = atob(payload);
+    const values = JSON.parse(payloadDecoded);
+    return values.sub;
+  }
 }
