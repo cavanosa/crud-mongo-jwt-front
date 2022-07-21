@@ -1,3 +1,4 @@
+import { TokenService } from './../services/token.service';
 import { Router } from '@angular/router';
 import { MessageService } from './../services/message.service';
 import { Product } from './../model/product';
@@ -15,15 +16,19 @@ export class ListComponent implements OnInit {
 
   products: Product[] = [];
 
+  isAdmin: boolean = false;
+
   constructor(
     private productService: ProductService,
     private toast: ToastrService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
     this.getProducts();
+    this.isAdmin = this.tokenService.isAdmin();
   }
 
   getProducts(): void {
